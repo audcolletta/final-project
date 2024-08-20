@@ -3,36 +3,27 @@ library(tidyverse)
 here::here()
 
 /Users/johncolletta/Rbootcamp/Final Project/data/mlb-elo/mlb_elo.csv
-#1 Create a {gtsummary} table of descriptive statistics about your data
-mlb <- read_csv(here::here( "data", "mlb-elo", "mlb_elo.csv"))
-tbl_summary(
-	mlb,
-	by = playoff,
-	include = c(season, neutral, elo1_pre, elo2_pre,
-							elo_prob1, elo_prob2, elo1_post, elo2_post,))
 
-table(mlb$season)
 # Option 1: tidytuesdayR package
 ## install.packages("tidytuesdayR")
 
-tuesdata <- tidytuesdayR::tt_load('2024-02-13')
+tuesdata <- tidytuesdayR::tt_load('2024-08-06')
 ## OR
-tuesdata <- tidytuesdayR::tt_load(2024, week = 7)
+tuesdata <- tidytuesdayR::tt_load(2024, week = 32)
 
-historical_spending <- tuesdata$historical_spending
-gifts_age <- tuesdata$gifts_age
-gifts_gender <- tuesdata$gifts_gender
+olympics <- tuesdata$olympics
 
 
 # Option 2: Read directly from GitHub
 
-historical_spending <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-13/historical_spending.csv')
-gifts_age <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-13/gifts_age.csv')
-gifts_gender <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-13/gifts_gender.csv')
+olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-08-06/olympics.csv')
 #1 Create a {gtsummary} table of descriptive statistics about your data
-view(gifts_gender)
 tbl_summary(
-	gifts_gender,
-	by = Gender,
-	include = c(Candy, Flowers, Jewelry, GreetingCards))
+	olympics,
+	by = sex,
+	include = c(age, height, weight, team))
 
+#2 Fit a regression and present well-formatted results from the regression (1 pt)
+#The regression doesn’t have to be of any particular scientific interest,
+#and you don’t have to interpret it in any particular way
+#You may use {broom} or {gtsummary} or both
