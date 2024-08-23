@@ -2,7 +2,6 @@ library(gtsummary)
 library(tidyverse)
 here::here()
 
-/Users/johncolletta/Rbootcamp/Final Project/data/mlb-elo/mlb_elo.csv
 
 library(readxl)
 demographic_data <- read_excel("~/Rbootcamp/epi590r-in-class/demographic data.xlsx")
@@ -47,5 +46,9 @@ tbl_uvregression(
 #feel free to adapt some of the examples from class, which were as simple as hist(data$variable)
 #x must be numeric (learned the hard way)
 hist(demographic_data$Age)
+
+#4 Write and use a function that does something with the data (1 pt)
+#It could be as simple as, for example, a new function that you write
+#by hand to calculate the standard deviation of a variable (like we did with the mean)
 
 
