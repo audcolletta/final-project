@@ -19,8 +19,6 @@ tbl_summary(
 	include = c(Age, `Race/Ethnicity`, Gender, `Martial Status`, `Level of Education`, Income)
 )
 
-
-
 rlang::last_trace(drop = FALSE)
 
 #2 Fit a regression and present well-formatted results from the regression (1 pt)
@@ -28,21 +26,24 @@ rlang::last_trace(drop = FALSE)
 #and you don’t have to interpret it in any particular way
 #You may use {broom} or {gtsummary} or both
 library(broom.helpers)
+# Renaming the column to avoid issues with spaces
+# These variables were giving me serious issues
+demographic_data <- demographic_data %>%
+	rename(Marital_Status = `Martial Status`)
+demographic_data <- demographic_data %>%
+	rename(Level_of_Education = `Level of Education`)
+demographic_data <- demographic_data %>%
+	rename(Race_Ethnicity = `Race/Ethnicity`)
+
+# Now use the renamed column in tbl_uvregression
 tbl_uvregression(
-	olympics,
-	y = age,
-	include = c(sex, height, weight, team),
-	method = lm)
-# Option 1: tidytuesdayR package
-## install.packages("tidytuesdayR")
+	demographic_data,
+	y = Age,
+	include = c(Race_Ethnicity, Gender, Marital_Status, Level_of_Education, Income),
+	method = lm
+)
 
-tuesdata <- tidytuesdayR::tt_load('2024-02-06')
-## OR
-tuesdata <- tidytuesdayR::tt_load(2024, week = 6)
 
-heritage <- tuesdata$heritage
 
-# Option 2: Read directly from GitHub
 
-heritage <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-06/heritage.csv')
-view(heritage)
+
