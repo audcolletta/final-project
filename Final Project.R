@@ -45,7 +45,7 @@ tbl_uvregression(
 
 #3 Create a figure (1 pt) It doesn’t need to look pretty;
 #feel free to adapt some of the examples from class, which were as simple as hist(data$variable)
-
-
+#x must be numeric (learned the hard way)
+hist(demographic_data$Age)
 
 
