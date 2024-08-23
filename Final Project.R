@@ -43,6 +43,8 @@ tbl_uvregression(
 	method = lm
 )
 
+#3 Create a figure (1 pt) It doesn’t need to look pretty;
+#feel free to adapt some of the examples from class, which were as simple as hist(data$variable)
 
 
 
