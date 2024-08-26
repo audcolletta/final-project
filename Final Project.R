@@ -12,7 +12,7 @@ View(demographic_data)
 
 
 #1 Create a {gtsummary} table of descriptive statistics about your data
-tbl_summary(
+ Summary_stats <- tbl_summary(
 	demographic_data,
 	by = Cohort,
 	include = c(Age, `Race/Ethnicity`, Gender, `Martial Status`, `Level of Education`, Income)
@@ -50,5 +50,9 @@ hist(demographic_data$Age)
 #4 Write and use a function that does something with the data (1 pt)
 #It could be as simple as, for example, a new function that you write
 #by hand to calculate the standard deviation of a variable (like we did with the mean)
+inline_text(Summary_stats, variable = "Age", column = "stat_1")
+#[1] "77 (76, 82)"
+inline_text(Summary_stats, variable = "Age", column = "stat_2")
+#[1] "73 (70, 75)"
 
-
+#5
