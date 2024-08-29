@@ -13,6 +13,7 @@ library(gtsummary)
 library(tidyverse)
 library(dplyr)
 library(readxl)
+library(ggplot2)
 here::here()
 demographic_data <- read_excel(here::here("data", "demographic data.xlsx"))
 colnames(demographic_data)
@@ -42,26 +43,27 @@ table1 <- tbl_summary(
 
 table1
 ```
+@fighist has a histogram and @tblone has a table
 
 ```{r}
 #| label: fighist
 #| fig-cap: "This is a histogram"
 hist(demographic_data$Age)
+ggsave(here::here("figures","fighist.png"))
 
 
 ```
 
-This is a histogram of the frequency of ages within Cohort 1 and 2 @fighist has a histogram and @tblone has a table
+This is a histogram of the frequency of ages within Cohort 1 and 2
 
 ```{r}
-#printing something else
 
+class(demographic_data$Age)
 
-
-stats <- list(n = nrow(table1),
-              mean_age = mean(table1$Income))
+stats <- list(n = nrow(demographic_data),
+              mean_age = mean(demographic_data$Age))
 ```
-
+The mean Income in this data set is `r stats`
 ```{r}
 univ_reg <- tbl_uvregression(
   demographic_data,
