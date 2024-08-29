@@ -1,0 +1,84 @@
+---
+title: "R Final Project"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+Demographic Data contains 30 observations and 9 different variables from Cohort 1 and Cohort 2 of the PRISEM study
+
+```{r}
+library(gtsummary)
+library(tidyverse)
+library(dplyr)
+library(readxl)
+here::here()
+demographic_data <- read_excel(here::here("data", "demographic data.xlsx"))
+colnames(demographic_data)
+
+```
+
+The variable names were coded with extra spaces so here I changed their names
+
+```{r}
+
+demographic_data <- demographic_data %>%
+	rename(Marital_Status = "Martial Status") %>%
+	rename(Level_of_Education = "Level of Education") %>%
+	rename(Race_Ethnicity = "Race/Ethnicity") %>%
+	rename(cohort = "Cohort")
+colnames(demographic_data)
+```
+
+```{r}
+#| label: Table One
+#| tbl-cap: "This is Table of Demographic Data"
+
+table1 <- tbl_summary(
+  demographic_data,
+  by = cohort,
+  include = c(Age, Race_Ethnicity, Gender, Marital_Status, Level_of_Education, Income))
+
+table1
+```
+
+```{r}
+#| label: fighist
+#| fig-cap: "This is a histogram"
+hist(demographic_data$Age)
+
+
+```
+
+This is a histogram of the frequency of ages within Cohort 1 and 2 @fighist has a histogram and @tblone has a table
+
+```{r}
+#printing something else
+
+
+
+stats <- list(n = nrow(table1),
+              mean_age = mean(table1$Income))
+```
+
+```{r}
+univ_reg <- tbl_uvregression(
+  demographic_data,
+  y = Age,
+  include = c(
+    Race_Ethnicity, Gender, Marital_Status, Level_of_Education, Income
+  ),
+  method = lm
+)
+#pulling stat from data
+univ_reg
+inline_text(univ_reg, variable = "Income", level = "More than $200,000")
+
+
+
+```
+
+Individuals who make more than \$200,000 were 8 years older
+
+\`\`\`

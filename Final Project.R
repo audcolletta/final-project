@@ -2,20 +2,27 @@ library(gtsummary)
 library(tidyverse)
 here::here()
 
-
 library(readxl)
 demographic_data <- read_excel("~/Rbootcamp/epi590r-in-class/demographic data.xlsx")
 View(demographic_data)
 
-
-
+# Renaming the column to avoid issues with spaces
+# These variables were giving me serious issues
+demographic_data <- demographic_data %>%
+	rename(Marital_Status = `Martial Status`)
+demographic_data <- demographic_data %>%
+	rename(Level_of_Education = `Level of Education`)
+demographic_data <- demographic_data %>%
+	rename(Race_Ethnicity = `Race/Ethnicity`)
+demographic_data <- demographic_data %>%
+	rename(cohort = `Cohort`)
 
 
 #1 Create a {gtsummary} table of descriptive statistics about your data
  Summary_stats <- tbl_summary(
 	demographic_data,
-	by = Cohort,
-	include = c(Age, `Race/Ethnicity`, Gender, `Martial Status`, `Level of Education`, Income)
+	by = cohort,
+	include = c(Age, Race_Ethnicity, Gender, Marital_Status, Level_of_Education, Income)
 )
 
 rlang::last_trace(drop = FALSE)
@@ -25,14 +32,7 @@ rlang::last_trace(drop = FALSE)
 #and you don’t have to interpret it in any particular way
 #You may use {broom} or {gtsummary} or both
 library(broom.helpers)
-# Renaming the column to avoid issues with spaces
-# These variables were giving me serious issues
-demographic_data <- demographic_data %>%
-	rename(Marital_Status = `Martial Status`)
-demographic_data <- demographic_data %>%
-	rename(Level_of_Education = `Level of Education`)
-demographic_data <- demographic_data %>%
-	rename(Race_Ethnicity = `Race/Ethnicity`)
+
 
 # Now use the renamed column in tbl_uvregression
 tbl_uvregression(
@@ -55,4 +55,12 @@ inline_text(Summary_stats, variable = "Age", column = "stat_1")
 inline_text(Summary_stats, variable = "Age", column = "stat_2")
 #[1] "73 (70, 75)"
 
-#5
+#5Create and render a quarto document that includes at least:
+#The table, regression results, and figure, with appropriate captions (1 pt)
+#Inline R code in at least 2 places, 1 pulling a statistic
+	#from a table (i.e., using gtsummary::inline_text())
+	#and 1 printing something else (like we did with the mean age in the example) (1 pt)
+#Cross-references to a table and a figure at least once each (1 pt)
+#A brief description of the data, including its source (1 pt)
+
+
