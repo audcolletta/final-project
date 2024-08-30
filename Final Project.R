@@ -6,6 +6,7 @@ library(readxl)
 
 View(demographic_data)
 
+
 # Renaming the column to avoid issues with spaces
 # These variables were giving me serious issues
 demographic_data <- demographic_data %>%
