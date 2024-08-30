@@ -1,9 +1,9 @@
 library(gtsummary)
 library(tidyverse)
 here::here()
-
+demographic_data <- read_excel(here::here("data", "demographic data.xlsx"))
 library(readxl)
-demographic_data <- read_excel("~/Rbootcamp/epi590r-in-class/demographic data.xlsx")
+
 View(demographic_data)
 
 # Renaming the column to avoid issues with spaces
@@ -25,7 +25,7 @@ demographic_data <- demographic_data %>%
 	include = c(Age, Race_Ethnicity, Gender, Marital_Status, Level_of_Education, Income)
 )
 
-rlang::last_trace(drop = FALSE)
+
 
 #2 Fit a regression and present well-formatted results from the regression (1 pt)
 #The regression doesn’t have to be of any particular scientific interest,
