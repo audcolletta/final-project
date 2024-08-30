@@ -51,7 +51,6 @@ table1
 hist(demographic_data$Age)
 ggsave(here::here("figures","fighist.png"))
 
-
 ```
 
 This is a histogram of the frequency of ages within Cohort 1 and 2
